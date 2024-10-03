@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PGBank Customer Page</title>
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+             background-image: url('CS.png'); /* Add your background image here */
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #2a9d8f; /* Darker teal */
+            color: #f1faee; /* Light pastel green */
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #264653 3px solid; /* Darker blue */
+        }
+        header a {
+            color: #f1faee; /* Light pastel green */
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            float: left;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        .nav-links {
+            display: none;
+            background: #444;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .nav-links a {
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            background: #2a9d8f; /* Darker teal */
+            color: #f1faee; /* Light pastel green */
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .nav-links a:hover {
+            background: #264653; /* Darker blue */
+        }
+        .show {
+            display: block;
+        }
+       .footer {
+            background: #2a9d8f; /* Darker teal */
+            color: #f1faee; /* Light pastel green */
+            text-align: center;
+            padding: 10px 0;
+            border-top: #264653 3px solid; /* Darker blue */
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+    <script>
+        function toggleCustomerServices() {
+            var services = document.getElementById('customerServices');
+            if (services.classList.contains('show')) {
+                services.classList.remove('show');
+            } else {
+                services.classList.add('show');
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>People Go Bank</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="javascript:void(0)" onclick="toggleCustomerServices()">Customer</a></li>
+                <li><a href="admin.html">Admin</a></li>
+            </ul>
+        </div>
+    </header>
+    <div id="customerServices" class="nav-links">
+        <h2>Customer Services</h2>
+        <a href="createAccount.html" target="_blank">Create Account</a>
+        <a href="loginAccount.html" target="_blank">Login Account</a>
+        <a href="updateDetails.html" target="_blank">Update Details</a>
+        <a href="transactionDetails.html" target="_blank">Transaction Details</a>
+        <a href="fetchDetails.html" target="_blank">Fetch Details</a>
+        <a href="feedback.html" target="_blank">Feedback</a>
+        <a href="contact.html" target="_blank">Contact</a>
+        <a href="faq.html" target="_blank">Frequently Asked Questions</a>
+    </div>
+    <div class="footer">
+        <p>© 2024 People GO. All rights reserved.</p>
+    </div>
+</body>
+</html>

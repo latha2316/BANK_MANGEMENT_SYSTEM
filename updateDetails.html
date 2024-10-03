@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PGBank- Update Details</title>
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            background-image: url('CS.png'); /* Add your background image here */
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #457b9d; /* Pastel blue */
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #1d3557; /* Dark blue */
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f1faee; /* Light pastel green */
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background: #ffafcc; /* Pastel pink */
+            color: #1d3557; /* Dark blue */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background: #ffcad4; /* Lighter pastel pink */
+        }
+        header {
+            background: #a8dadc; /* Pastel teal */
+            color: #1d3557; /* Dark blue */
+            padding: 10px 0;
+            text-align: center;
+        }
+        header a {
+            color: #1d3557; /* Dark blue */
+            text-decoration: none;
+            padding: 10px;
+            display: inline-block;
+        }
+        header a:hover {
+            background: #f1faee; /* Light pastel green */
+        }
+        .nav-links {
+            background: #f1faee; /* Light pastel green */
+            padding: 10px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            padding: 10px;
+            margin: 5px;
+            background: #a8dadc; /* Pastel teal */
+            color: #1d3557; /* Dark blue */
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .nav-links a:hover {
+            background: #ffcad4; /* Light pastel pink */
+        }
+        .footer {
+            background-color: #a8dadc; /* Pastel teal */
+            color: #1d3557; /* Dark blue */
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>People Go Bank</h1>
+        <a href="index.html">Home</a>
+        <a href="customer.html">Customer</a>
+        <a href="admin.html">Admin</a>
+    </header>
+    <div class="nav-links">
+        <h2>Customer Services</h2>
+        <a href="createAccount.html" target="_blank">Create Account</a>
+        <a href="loginAccount.html" target="_blank">Login Account</a>
+        <a href="updateDetails.html" target="_blank">Update Details</a>
+        <a href="transactionDetails.html" target="_blank">Transaction Details</a>
+        <a href="fetchDetails.html" target="_blank">Fetch Details</a>
+        <a href="feedback.html" target="_blank">Feedback</a>
+        <a href="contact.html" target="_blank">Contact</a>
+        <a href="faq.html" target="_blank">Frequently Asked Questions</a>
+    </div>
+    <div class="container">
+        <h2>Update Details</h2>
+        <form action="UpdateDetailsServlet" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="pan">PAN Card:</label>
+            <input type="text" id="pan" name="pan">
+
+            <label for="aadhaar">Aadhaar Card:</label>
+            <input type="text" id="aadhaar" name="aadhaar">
+
+            <input type="submit" value="Update Details">
+        </form>
+    </div>
+    <div class="footer">
+        <p>© 2024 People GO. All rights reserved.</p>
+    </div>
+</body>
+</html>

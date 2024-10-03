@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PeopleGoBank</title>
+    <link rel="icon" type="image/png" href="icon.png">
+     <link rel="shortcut icon" href="icon.png">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #DCDCDC;
+            background-image: url('BG.png');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2a9d8f; /* Darker teal */
+            padding: 10px 20px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .navbar a {
+            color: #f1faee; /* Light pastel green */
+            text-decoration: none;
+            padding: 14px 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #264653; /* Darker blue */
+            color: #f1faee; /* Light pastel green */
+            border-radius: 4px;
+        }
+        .navbar img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        .search-bar input[type="text"] {
+            padding: 6px 10px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #e9c46a; /* Neutral color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .search-bar button {
+            padding: 6px 10px;
+            background-color: #e76f51; /* Complementary color */
+            color: #f1faee; /* Light pastel green */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .search-bar button:hover {
+            background-color: #f4a261; /* Lighter complementary color */
+        }
+        .content {
+            text-align: center;
+            margin-top: 100px; /* Adjust for the fixed navbar */
+        }
+        .content h1 {
+            color: #fff; /* White color */
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .content p {
+            color: #fff; /* White color */
+            font-size: 1.2em;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .footer {
+            background-color: #2a9d8f; /* Darker teal */
+            color: #f1faee; /* Light pastel green */
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html"><img src="icon.png" alt="Logo"></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="customer.html">Customer</a>
+            <a href="admin.html">Admin</a>
+        </div>
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Search...">
+            <button onclick="searchPage()">Search</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2024 People GO. All rights reserved.</p>
+    </div>
+
+    <script>
+        function searchPage() {
+            var query = document.getElementById('search').value.toLowerCase();
+            if (query === 'customer') {
+                window.location.href = 'customer.html';
+            } else if (query === 'admin') {
+                window.location.href = 'admin.html';
+            } else {
+                alert('Page not found');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+package com.pgbs;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/LoginAccountServlet")
+public class LoginAccountServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        Connection conn1 = null;
+        Connection conn2 = null;
+        PreparedStatement pstmt1 = null;
+        PreparedStatement pstmt2 = null;
+        ResultSet rs1 = null;
+        ResultSet rs2 = null;
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        try {
+            // Load the JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establish the connection to the main database
+            conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/peoplegobanks", "root", "admin");
+
+            // Validate username and password
+            String query1 = "SELECT * FROM accounts WHERE username = ? AND password = ?";
+            pstmt1 = conn1.prepareStatement(query1);
+            pstmt1.setString(1, username);
+            pstmt1.setString(2, password);
+            rs1 = pstmt1.executeQuery();
+
+            if (rs1.next()) {
+                // Retrieve account details
+                String accountNumber = rs1.getString("accountNumber");
+                String accountHolderName = rs1.getString("accountHolderName");
+                String accountType = rs1.getString("accountType");
+                String balance = rs1.getString("balance");
+                String minBalance = rs1.getString("minBalance");
+                String gender = rs1.getString("gender");
+
+                // Establish the connection to the validation database
+                conn2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/peoplegobanks", "root", "admin");
+
+                // Check if PAN and Aadhaar details are present
+                String query2 = "SELECT * FROM user_validation WHERE username = ?";
+                pstmt2 = conn2.prepareStatement(query2);
+                pstmt2.setString(1, username);
+                rs2 = pstmt2.executeQuery();
+
+                out.println("<html><head><style>");
+                out.println("body { font-family: Arial, sans-serif; background-color: #f4f4f4; }");
+                out.println(".container { width: 80%; margin: auto; overflow: hidden; background: #ffffff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }");
+                out.println("table { width: 100%; border-collapse: collapse; margin: 20px 0; }");
+                out.println("table, th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }");
+                out.println("th { background-color: #a8dadc; color: #1d3557; }");
+                out.println("td { background-color: #f1faee; color: #1d3557; }");
+                out.println("</style></head><body>");
+                out.println("<div class='container'>");
+                out.println("<h2>Login Successful!</h2>");
+                out.println("<table>");
+                out.println("<tr><th>Field</th><th>Value</th></tr>");
+                out.println("<tr><td>Username</td><td>" + username + "</td></tr>");
+                out.println("<tr><td>Account Number</td><td>" + accountNumber + "</td></tr>");
+                out.println("<tr><td>Account Holder Name</td><td>" + accountHolderName + "</td></tr>");
+                out.println("<tr><td>Account Type</td><td>" + accountType + "</td></tr>");
+                out.println("<tr><td>Balance</td><td>" + balance + "</td></tr>");
+                out.println("<tr><td>Minimum Balance</td><td>" + minBalance + "</td></tr>");
+                out.println("<tr><td>Gender</td><td>" + gender + "</td></tr>");
+
+                boolean panFound = false;
+                boolean aadhaarFound = false;
+
+                if (rs2.next()) {
+                    String pan = rs2.getString("pan");
+                    String aadhaar = rs2.getString("aadhaar");
+                    if (!pan.equals("Not Provided")) {
+                        out.println("<tr><td>PAN</td><td>" + pan + "</td></tr>");
+                        panFound = true;
+                    }
+                    if (!aadhaar.equals("Not Provided")) {
+                        out.println("<tr><td>Aadhaar</td><td>" + aadhaar + "</td></tr>");
+                        aadhaarFound = true;
+                    }
+                }
+
+                if (!panFound) {
+                    out.println("<tr><td colspan='2'>PAN details are missing. Please update your PAN information.</td></tr>");
+                }
+                if (!aadhaarFound) {
+                    out.println("<tr><td colspan='2'>Aadhaar details are missing. Please update your Aadhaar information.</td></tr>");
+                }
+
+                out.println("</table>");
+                out.println("</div>");
+                out.println("</body></html>");
+            } else {
+                out.println("<html><head><style>");
+                out.println("body { font-family: Arial, sans-serif; background-color: #f4f4f4; }");
+                out.println(".container { width: 80%; margin: auto; overflow: hidden; background: #ffffff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }");
+                out.println("</style></head><body>");
+                out.println("<div class='container'>");
+                out.println("<h2>Login Failed</h2>");
+                out.println("<p>Invalid username or password. Please try again.</p>");
+                out.println("</div>");
+                out.println("</body></html>");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs1 != null) rs1.close();
+                if (pstmt1 != null) pstmt1.close();
+                if (conn1 != null) conn1.close();
+                if (rs2 != null) rs2.close();
+                if (pstmt2 != null) pstmt2.close();
+                if (conn2 != null) conn2.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
